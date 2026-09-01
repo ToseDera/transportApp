@@ -120,11 +120,11 @@ sql/transportapp_script.sql   script para ejecutar desde el cliente de MySQL
 
 ## Decisiones tomadas ante puntos ambiguos
 
-- **Placa y validación.** La placa lleva `@Pattern("^[A-Z]{3}[0-9]{3}$")` en la entidad y además se
-  normaliza a mayúsculas y sin espacios en `CarroService`. Como Bean Validation se ejecuta antes de
-  que la entidad llegue al servicio, una placa escrita como `hkl 452` se rechaza con el mensaje
-  "La placa debe tener el formato ABC123" y no alcanza a normalizarse. La normalización del servicio
-  queda entonces como red de seguridad para las escrituras que no pasan por el formulario.
+- **Placa y validación.** La placa lleva `@Pattern("^[A-Za-z]{3}[0-9]{3}$")` en la entidad y se
+  normaliza a mayúsculas y sin espacios en `CarroService`. El patrón acepta las dos cajas justamente
+  para que la normalización del servicio alcance a ejecutarse: escribir `hkl999` guarda `HKL999`, y
+  reintentar con `HKL999` choca con el control de unicidad. Un formato realmente inválido, como
+  `hkl 999` o `HKL9999`, sigue rechazándose con "La placa debe tener el formato ABC123".
 - **Correo y documento.** Siguiendo el mismo criterio, el correo se guarda en minúsculas y el
   documento sin espacios antes de comprobar la unicidad.
 - **Fecha de registro.** `Usuario.fechaRegistro` se asigna en `@PrePersist` y no aparece en el
