@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/layout :: head}"></head>
+
+<body class="bg-light d-flex flex-column min-vh-100">
+
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="container">
+
+    <div th:replace="~{fragments/layout :: alertas}"></div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-white">
+            <h1 class="h4 mb-0" th:text="${titulo}">Nuevo usuario</h1>
+        </div>
+        <div class="card-body">
+
+            <form method="post" th:object="${usuario}"
+                  th:action="${esEdicion} ? @{/usuarios/{id}(id=${usuario.id})} : @{/usuarios}">
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label" for="nombres">Nombres</label>
+                        <input type="text" id="nombres" class="form-control" th:field="*{nombres}"
+                               th:classappend="${#fields.hasErrors('nombres')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:errors="*{nombres}">Error</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="apellidos">Apellidos</label>
+                        <input type="text" id="apellidos" class="form-control" th:field="*{apellidos}"
+                               th:classappend="${#fields.hasErrors('apellidos')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:errors="*{apellidos}">Error</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="email">Correo electrónico</label>
+                        <input type="text" id="email" class="form-control" th:field="*{email}"
+                               th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:errors="*{email}">Error</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="telefono">Teléfono</label>
+                        <input type="text" id="telefono" class="form-control" th:field="*{telefono}"
+                               th:classappend="${#fields.hasErrors('telefono')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:errors="*{telefono}">Error</div>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label" for="direccion">Dirección</label>
+                        <input type="text" id="direccion" class="form-control" th:field="*{direccion}"
+                               th:classappend="${#fields.hasErrors('direccion')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:errors="*{direccion}">Error</div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input type="checkbox" id="activo" class="form-check-input" th:field="*{activo}">
+                            <label class="form-check-label" for="activo">Usuario activo</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary"
+                            th:text="${esEdicion} ? 'Actualizar' : 'Guardar'">Guardar</button>
+                    <a class="btn btn-outline-secondary" th:href="@{/usuarios}">Cancelar</a>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+
+</body>
+</html>

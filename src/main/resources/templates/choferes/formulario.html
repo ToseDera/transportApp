@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/layout :: head}"></head>
+
+<body class="bg-light d-flex flex-column min-vh-100">
+
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="container">
+
+    <div th:replace="~{fragments/layout :: alertas}"></div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-white">
+            <h1 class="h4 mb-0" th:text="${titulo}">Nuevo chofer</h1>
+        </div>
+        <div class="card-body">
+
+            <form method="post" th:object="${chofer}"
+                  th:action="${esEdicion} ? @{/choferes/{id}(id=${chofer.id})} : @{/choferes}">
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label" for="nombres">Nombres</label>
+                        <input type="text" id="nombres" class="form-control" th:field="*{nombres}"
+                               th:classappend="${#fields.hasErrors('nombres')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:errors="*{nombres}">Error</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="apellidos">Apellidos</label>
+                        <input type="text" id="apellidos" class="form-control" th:field="*{apellidos}"
+                               th:classappend="${#fields.hasErrors('apellidos')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:errors="*{apellidos}">Error</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="documento">Documento</label>
+                        <input type="text" id="documento" class="form-control" th:field="*{documento}"
+                               th:classappend="${#fields.hasErrors('documento')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:errors="*{documento}">Error</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="telefono">Teléfono</label>
+                        <input type="text" id="telefono" class="form-control" th:field="*{telefono}"
+                               th:classappend="${#fields.hasErrors('telefono')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:errors="*{telefono}">Error</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="numeroLicencia">Número de licencia</label>
+                        <input type="text" id="numeroLicencia" class="form-control" th:field="*{numeroLicencia}"
+                               th:classappend="${#fields.hasErrors('numeroLicencia')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:errors="*{numeroLicencia}">Error</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="categoriaLicencia">Categoría de licencia</label>
+                        <select id="categoriaLicencia" class="form-select" th:field="*{categoriaLicencia}"
+                                th:classappend="${#fields.hasErrors('categoriaLicencia')} ? 'is-invalid'">
+                            <option value="">Seleccione una categoría</option>
+                            <option th:each="cat : ${categorias}"
+                                    th:value="${cat}"
+                                    th:text="${cat.descripcion}">C1</option>
+                        </select>
+                        <div class="invalid-feedback" th:errors="*{categoriaLicencia}">Error</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="fechaVencimientoLicencia">Vencimiento de la licencia</label>
+                        <input type="date" id="fechaVencimientoLicencia" class="form-control"
+                               th:field="*{fechaVencimientoLicencia}"
+                               th:classappend="${#fields.hasErrors('fechaVencimientoLicencia')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:errors="*{fechaVencimientoLicencia}">Error</div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input type="checkbox" id="activo" class="form-check-input" th:field="*{activo}">
+                            <label class="form-check-label" for="activo">Chofer activo</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-warning"
+                            th:text="${esEdicion} ? 'Actualizar' : 'Guardar'">Guardar</button>
+                    <a class="btn btn-outline-secondary" th:href="@{/choferes}">Cancelar</a>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+
+</body>
+</html>

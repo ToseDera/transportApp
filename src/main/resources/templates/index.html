@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/layout :: head}"></head>
+
+<body class="bg-light d-flex flex-column min-vh-100">
+
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="container">
+
+    <div th:replace="~{fragments/layout :: alertas}"></div>
+
+    <div class="p-4 mb-4 bg-white rounded shadow-sm">
+        <h1 class="h3 mb-1">Panel de TransportApp</h1>
+        <p class="text-muted mb-0">Gestión de usuarios, carros y choferes de la empresa de transporte.</p>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Usuarios</h5>
+                    <p class="display-6 fw-bold text-primary" th:text="${totalUsuarios}">0</p>
+                    <p class="card-text text-muted">Clientes registrados en la plataforma.</p>
+                </div>
+                <div class="card-footer bg-white border-0">
+                    <a class="btn btn-primary w-100" th:href="@{/usuarios}">Ver usuarios</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Carros</h5>
+                    <p class="display-6 fw-bold text-success" th:text="${totalCarros}">0</p>
+                    <p class="card-text text-muted">Vehículos disponibles en la flota.</p>
+                </div>
+                <div class="card-footer bg-white border-0">
+                    <a class="btn btn-success w-100" th:href="@{/carros}">Ver carros</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Choferes</h5>
+                    <p class="display-6 fw-bold text-warning" th:text="${totalChoferes}">0</p>
+                    <p class="card-text text-muted">Conductores habilitados de la empresa.</p>
+                </div>
+                <div class="card-footer bg-white border-0">
+                    <a class="btn btn-warning w-100" th:href="@{/choferes}">Ver choferes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+
+</body>
+</html>

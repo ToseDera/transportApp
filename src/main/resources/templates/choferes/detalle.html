@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/layout :: head}"></head>
+
+<body class="bg-light d-flex flex-column min-vh-100">
+
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="container">
+
+    <div th:replace="~{fragments/layout :: alertas}"></div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-white">
+            <h1 class="h4 mb-0" th:text="${titulo}">Detalle del chofer</h1>
+        </div>
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-3">ID</dt>
+                <dd class="col-sm-9" th:text="${chofer.id}">1</dd>
+
+                <dt class="col-sm-3">Nombres</dt>
+                <dd class="col-sm-9" th:text="${chofer.nombres}">Nombres</dd>
+
+                <dt class="col-sm-3">Apellidos</dt>
+                <dd class="col-sm-9" th:text="${chofer.apellidos}">Apellidos</dd>
+
+                <dt class="col-sm-3">Documento</dt>
+                <dd class="col-sm-9" th:text="${chofer.documento}">1020304050</dd>
+
+                <dt class="col-sm-3">Número de licencia</dt>
+                <dd class="col-sm-9" th:text="${chofer.numeroLicencia}">LIC-000</dd>
+
+                <dt class="col-sm-3">Categoría de licencia</dt>
+                <dd class="col-sm-9" th:text="${chofer.categoriaLicencia?.descripcion}">C1 - Vehículo particular</dd>
+
+                <dt class="col-sm-3">Teléfono</dt>
+                <dd class="col-sm-9" th:text="${chofer.telefono}">3001234567</dd>
+
+                <dt class="col-sm-3">Vencimiento de la licencia</dt>
+                <dd class="col-sm-9" th:text="${chofer.fechaVencimientoLicencia}">2027-01-01</dd>
+
+                <dt class="col-sm-3">Estado</dt>
+                <dd class="col-sm-9">
+                    <span th:if="${chofer.activo}" class="badge text-bg-success">Activo</span>
+                    <span th:unless="${chofer.activo}" class="badge text-bg-secondary">Inactivo</span>
+                </dd>
+            </dl>
+        </div>
+        <div class="card-footer bg-white">
+            <a class="btn btn-warning" th:href="@{/choferes/{id}/editar(id=${chofer.id})}">Editar</a>
+            <a class="btn btn-outline-secondary" th:href="@{/choferes}">Volver al listado</a>
+        </div>
+    </div>
+
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+
+</body>
+</html>

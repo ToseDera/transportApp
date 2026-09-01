@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/layout :: head}"></head>
+
+<body class="bg-light d-flex flex-column min-vh-100">
+
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="container">
+
+    <div th:replace="~{fragments/layout :: alertas}"></div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-white">
+            <h1 class="h4 mb-0" th:text="${titulo}">Detalle del carro</h1>
+        </div>
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-3">ID</dt>
+                <dd class="col-sm-9" th:text="${carro.id}">1</dd>
+
+                <dt class="col-sm-3">Placa</dt>
+                <dd class="col-sm-9" th:text="${carro.placa}">ABC123</dd>
+
+                <dt class="col-sm-3">Marca</dt>
+                <dd class="col-sm-9" th:text="${carro.marca}">Marca</dd>
+
+                <dt class="col-sm-3">Modelo</dt>
+                <dd class="col-sm-9" th:text="${carro.modelo}">Modelo</dd>
+
+                <dt class="col-sm-3">Año</dt>
+                <dd class="col-sm-9" th:text="${carro.anio}">2020</dd>
+
+                <dt class="col-sm-3">Color</dt>
+                <dd class="col-sm-9" th:text="${carro.color}">Color</dd>
+
+                <dt class="col-sm-3">Precio por día</dt>
+                <dd class="col-sm-9" th:text="${#numbers.formatDecimal(carro.precioDia, 1, 'POINT', 2, 'COMMA')}">0,00</dd>
+
+                <dt class="col-sm-3">Estado</dt>
+                <dd class="col-sm-9">
+                    <span th:if="${carro.disponible}" class="badge text-bg-success">Disponible</span>
+                    <span th:unless="${carro.disponible}" class="badge text-bg-secondary">No disponible</span>
+                </dd>
+            </dl>
+        </div>
+        <div class="card-footer bg-white">
+            <a class="btn btn-warning" th:href="@{/carros/{id}/editar(id=${carro.id})}">Editar</a>
+            <a class="btn btn-outline-secondary" th:href="@{/carros}">Volver al listado</a>
+        </div>
+    </div>
+
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+
+</body>
+</html>

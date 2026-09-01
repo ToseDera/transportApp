@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/layout :: head}"></head>
+
+<body class="bg-light d-flex flex-column min-vh-100">
+
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="container">
+
+    <div th:replace="~{fragments/layout :: alertas}"></div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-white">
+            <h1 class="h4 mb-0" th:text="${titulo}">Detalle del usuario</h1>
+        </div>
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-3">ID</dt>
+                <dd class="col-sm-9" th:text="${usuario.id}">1</dd>
+
+                <dt class="col-sm-3">Nombres</dt>
+                <dd class="col-sm-9" th:text="${usuario.nombres}">Nombres</dd>
+
+                <dt class="col-sm-3">Apellidos</dt>
+                <dd class="col-sm-9" th:text="${usuario.apellidos}">Apellidos</dd>
+
+                <dt class="col-sm-3">Correo electrónico</dt>
+                <dd class="col-sm-9" th:text="${usuario.email}">correo@ejemplo.com</dd>
+
+                <dt class="col-sm-3">Teléfono</dt>
+                <dd class="col-sm-9" th:text="${usuario.telefono}">3001234567</dd>
+
+                <dt class="col-sm-3">Dirección</dt>
+                <dd class="col-sm-9" th:text="${usuario.direccion}">Dirección</dd>
+
+                <dt class="col-sm-3">Estado</dt>
+                <dd class="col-sm-9">
+                    <span th:if="${usuario.activo}" class="badge text-bg-success">Activo</span>
+                    <span th:unless="${usuario.activo}" class="badge text-bg-secondary">Inactivo</span>
+                </dd>
+
+                <dt class="col-sm-3">Fecha de registro</dt>
+                <dd class="col-sm-9" th:text="${usuario.fechaRegistro}">2026-01-01</dd>
+            </dl>
+        </div>
+        <div class="card-footer bg-white">
+            <a class="btn btn-warning" th:href="@{/usuarios/{id}/editar(id=${usuario.id})}">Editar</a>
+            <a class="btn btn-outline-secondary" th:href="@{/usuarios}">Volver al listado</a>
+        </div>
+    </div>
+
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+
+</body>
+</html>

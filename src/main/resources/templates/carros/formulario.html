@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/layout :: head}"></head>
+
+<body class="bg-light d-flex flex-column min-vh-100">
+
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="container">
+
+    <div th:replace="~{fragments/layout :: alertas}"></div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-white">
+            <h1 class="h4 mb-0" th:text="${titulo}">Nuevo carro</h1>
+        </div>
+        <div class="card-body">
+
+            <form method="post" th:object="${carro}"
+                  th:action="${esEdicion} ? @{/carros/{id}(id=${carro.id})} : @{/carros}">
+
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label" for="placa">Placa</label>
+                        <input type="text" id="placa" class="form-control" th:field="*{placa}"
+                               placeholder="ABC123"
+                               th:classappend="${#fields.hasErrors('placa')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:errors="*{placa}">Error</div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label" for="marca">Marca</label>
+                        <input type="text" id="marca" class="form-control" th:field="*{marca}"
+                               th:classappend="${#fields.hasErrors('marca')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:errors="*{marca}">Error</div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label" for="modelo">Modelo</label>
+                        <input type="text" id="modelo" class="form-control" th:field="*{modelo}"
+                               th:classappend="${#fields.hasErrors('modelo')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:errors="*{modelo}">Error</div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label" for="anio">Año</label>
+                        <input type="number" id="anio" class="form-control" th:field="*{anio}"
+                               th:classappend="${#fields.hasErrors('anio')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:errors="*{anio}">Error</div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label" for="color">Color</label>
+                        <input type="text" id="color" class="form-control" th:field="*{color}"
+                               th:classappend="${#fields.hasErrors('color')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:errors="*{color}">Error</div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label" for="precioDia">Precio por día</label>
+                        <input type="number" step="0.01" id="precioDia" class="form-control" th:field="*{precioDia}"
+                               th:classappend="${#fields.hasErrors('precioDia')} ? 'is-invalid'">
+                        <div class="invalid-feedback" th:errors="*{precioDia}">Error</div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input type="checkbox" id="disponible" class="form-check-input" th:field="*{disponible}">
+                            <label class="form-check-label" for="disponible">Carro disponible</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-success"
+                            th:text="${esEdicion} ? 'Actualizar' : 'Guardar'">Guardar</button>
+                    <a class="btn btn-outline-secondary" th:href="@{/carros}">Cancelar</a>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+
+</body>
+</html>
